@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				height: 2000px;
+			}
+			.element {
+				width: 500px;
+				height: 500px;
+				background: #bada55;
+				position: relative;
+				top: 200px;
+			}
+			.element.fixed {
+				background: #eaeaea;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="element">
+			
+		</div>
+
+		<script src="jquery.min.js"></script>
+		<script type="text/javascript" src="hitstop.jquery.js"></script>
+		<script type="text/javascript">
+			
+			$(document).ready(function () {
+				var $element = $('.element');
+
+				$element.hitsTop(function (hasHitTheTop) {
+					if (hasHitTheTop) {
+						$element.addClass('fixed');
+					} else {
+						$element.removeClass('fixed');
+					}
+				});
+			});
+		
+		</script>
+	</body>
+</html>
