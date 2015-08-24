@@ -5,13 +5,23 @@
 	 * Simple jQuery plugin for doing stuff when an element
 	 * hits the top of the page.
 	 * @author Ord&Bild Reklambyrå
-	 * @version 1
+	 * @version 1.1
 	 */
-	var hitsTop = function (element, callback) {
+	var hitsTop = function (element, options) {
 		// Store the elements and the callback function
 		this.element = element;
 		this.$element = $(element);
-		this.callback = callback;
+
+		// Settings
+		var defaults = {
+			topDistance: this.$element.offset().top
+		};
+		if (typeof(options) === 'function') {
+			defaults.callback = options;
+		} else {
+			defaults.callback = options.callback;
+		}
+		this.options = $.extend( {}, defaults, options) ;
 
 		// Handy global variable
 		this.$window = $(window);
@@ -27,6 +37,7 @@
 		this.hadHitTop = this.hitTop;
 		
 		this.setElementOffset();
+		this.scrollHandler();
 		this.events();
 	};
 
@@ -35,7 +46,7 @@
 	 * in the DOM on each scroll event!
 	 */
 	hitsTop.prototype.setElementOffset = function() {
-		this.elementOffset = this.$element.offset().top;
+		this.elementOffset = this.options.topDistance;
 	};
 
 	/**
@@ -52,14 +63,13 @@
 	hitsTop.prototype.scrollHandler = function() {
 		this.hitTop = (this.$window.scrollTop() >= this.elementOffset);
 		if (this.hitTop !== this.hadHitTop) {
-			this.callback(this.hitTop);
+			this.options.callback(this.hitTop);
 			this.hadHitTop = this.hitTop;
 		}
 	};
 
 	/**
 	 * When the window is resized or the orientation has changed...
-	 * @return {[type]} [description]
 	 */
 	hitsTop.prototype.resizeHandler = function() {
 		this.setElementOffset();
@@ -68,11 +78,11 @@
 	/**
 	 * Add plugin to the jQuery object.
 	 */
-	$.fn['hitsTop'] = function (callback) {
+	$.fn['hitsTop'] = function (options) {
 		return this.each(function () {
             if (!$.data(this, 'plugin_hitsTop')) {
                 $.data(this, 'plugin_hitsTop', 
-                new hitsTop( this, callback ));
+                new hitsTop( this, options ));
             }
         });
 	}

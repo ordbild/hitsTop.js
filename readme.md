@@ -1,4 +1,4 @@
-hitsTop.js
+#hitsTop.js
 
 ````javascript
 $('.element').hitsTop(function (hasHitTheTop) {
