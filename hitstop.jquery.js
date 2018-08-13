@@ -54,7 +54,7 @@
 	 */
 	hitsTop.prototype.events = function() {
 		this.$window.on('resize orientationchange', this.resizeHandler.bind(this));
-		this.$window.on('scroll', this.scrollHandler.bind(this));
+		this.$window.on('scroll touchmove', this.scrollHandler.bind(this));
 	};
 
 	/**
