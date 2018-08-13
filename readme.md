@@ -1,4 +1,4 @@
-#HitsTop v2
+# HitsTop v2
 Lägg in en div och positionera den på ett visst avstånd från toppen.
 ````html
 <body>
@@ -12,8 +12,10 @@ Lägg in en div och positionera den på ett visst avstånd från toppen.
 ````javascript
 // Importera modulen (Kräver Webpack)
 import HitsTop from './Hitstop';
+
 // Elementet som det ska hända någonting med när trigger-div:en slår i toppen.
 const header = document.querySelector('.header');
+
 // Inita HitsTop. Första argumentet är elementet som "ska slå i toppen."
 // Andra argumentet är en callback med vad som ska hända när elementet passerar toppen.
 new HitsTop(document.getElementById('js-hitstop'), function(hasPassedTheTop, element) {
@@ -25,9 +27,9 @@ new HitsTop(document.getElementById('js-hitstop'), function(hasPassedTheTop, ele
 });
 ````
 
-#HitsTop v1
+# HitsTop v1
 
-##jQuery (gamla)
+## jQuery (gamla)
 
 ````javascript
 $('.element').hitsTop(function (hasHitTheTop) {
